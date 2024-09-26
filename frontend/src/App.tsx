@@ -17,22 +17,18 @@ function App() {
 
     setUploading(true);
     setIsUploaded(false);
-    setUploadResponse(null); 
+    setUploadResponse(null);
     try {
-      const apiUrl = process.env.VITE_APP_API_URL;
-      const response = await axios.post(
-        apiUrl,
-        formData,
-        {
-          headers: {
-            "Content-Type": "multipart/form-data",
-          },
-        }
-      );
+      const apiUrl = import.meta.env.VITE_APP_API_URL || "localhost:3000";
+      const response = await axios.post(`${apiUrl}/call/analysis`, formData, {
+        headers: {
+          "Content-Type": "multipart/form-data",
+        },
+      });
 
       message.success(`${file.name} enviado com sucesso!`);
       console.log("Resposta do servidor:", response.data);
-      setUploadResponse(response.data); 
+      setUploadResponse(response.data);
       setIsUploaded(true);
     } catch (error) {
       message.error(`Falha ao enviar o arquivo ${file.name}.`);
@@ -41,7 +37,6 @@ function App() {
       setUploading(false);
     }
   };
-
 
   const resetUpload = () => {
     setIsUploaded(false);
@@ -136,7 +131,7 @@ function App() {
             {uploadResponse.metricas.tempoOuvindo}
           </p>
           <h4>Sugestões</h4>
-          <p>{uploadResponse.sugestões}</p>
+          <p>{uploadResponse.sugestoes}</p>
 
           <Button
             type="primary"
