@@ -9,7 +9,7 @@ const { Dragger } = Upload;
 function App() {
   const [uploading, setUploading] = useState<boolean>(false);
   const [isUploaded, setIsUploaded] = useState<boolean>(false);
-  const [uploadResponse, setUploadResponse] = useState<any>(null); // Estado para armazenar a resposta do upload
+  const [uploadResponse, setUploadResponse] = useState<any>(null);
 
   const uploadFile = async (file: File) => {
     const formData = new FormData();
@@ -17,12 +17,12 @@ function App() {
 
     setUploading(true);
     setIsUploaded(false);
-    setUploadResponse(null); // Limpa a resposta ao iniciar o upload
+    setUploadResponse(null); 
 
     try {
-      // Realizando o upload do arquivo para o servidor local na porta 3000
+     
       const response = await axios.post(
-        "http://localhost:3000/call/analysis",
+        process.env.VITE_APP_API_URL,
         formData,
         {
           headers: {
@@ -33,7 +33,7 @@ function App() {
 
       message.success(`${file.name} enviado com sucesso!`);
       console.log("Resposta do servidor:", response.data);
-      setUploadResponse(response.data); // Armazena a resposta no estado
+      setUploadResponse(response.data); 
       setIsUploaded(true);
     } catch (error) {
       message.error(`Falha ao enviar o arquivo ${file.name}.`);
@@ -43,7 +43,7 @@ function App() {
     }
   };
 
-  // Função para reiniciar o processo de upload
+
   const resetUpload = () => {
     setIsUploaded(false);
     setUploadResponse(null);
