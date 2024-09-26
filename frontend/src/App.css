@@ -1,0 +1,69 @@
+#root {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 2rem;
+}
+
+.card-upload {
+  background: #ebebeb;
+
+  min-width: 320px;
+  max-width: 480px;
+  height: 400px;
+  padding: 1.5rem 2rem;
+  border-radius: 0.5rem;
+}
+/* CSS para animar o SVG */
+.svg-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+
+.rotating-logo {
+  animation: rotate 5s infinite linear, scaleUp 5s infinite ease-in-out,
+    fadeInOut 5s infinite ease-in-out;
+}
+
+.feedback-container {
+  display: flex;
+  align-items: baseline;
+  flex-direction: column;
+  justify-items: start;
+}
+
+/* Rotacionar o SVG */
+@keyframes rotate {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+/* Escalar para cima e para baixo */
+@keyframes scaleUp {
+  0%,
+  100% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.2);
+  }
+}
+
+/* Esmaecer (fade in e fade out) */
+@keyframes fadeInOut {
+  0%,
+  100% {
+    opacity: 0.5;
+  }
+  50% {
+    opacity: 1;
+  }
+  70% {
+    opacity: 1;
+  }
+}
