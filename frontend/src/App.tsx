@@ -19,7 +19,7 @@ function App() {
     setIsUploaded(false);
     setUploadResponse(null);
     try {
-      const apiUrl = import.meta.env.VITE_APP_API_URL || "localhost:3000";
+      const apiUrl = import.meta.env.VITE_APP_API_URL;
       const response = await axios.post(`${apiUrl}/call/analysis`, formData, {
         headers: {
           "Content-Type": "multipart/form-data",
