@@ -18,11 +18,10 @@ function App() {
     setUploading(true);
     setIsUploaded(false);
     setUploadResponse(null); 
-
     try {
-     
+      const apiUrl = process.env.VITE_APP_API_URL;
       const response = await axios.post(
-        process.env.VITE_APP_API_URL,
+        apiUrl,
         formData,
         {
           headers: {
