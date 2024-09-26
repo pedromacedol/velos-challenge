@@ -19,7 +19,7 @@ export class DynamoDBService {
     this.tableName = this.configService.get<string>('DYNAMODB_TABLE_NAME');
   }
 
-  async insertConversation(messages: string): Promise<void> {
+  async insertConversation(messages: string): Promise<string> {
     const conversationId = uuidv4();
     const params = {
       TableName: this.tableName,
