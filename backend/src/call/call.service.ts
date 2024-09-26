@@ -33,26 +33,26 @@ export class CallService {
       },
       {
         role: 'user',
-        content: `Analise a seguinte transcrição de chamada de vendas e forneça um feedback detalhado em português no formato JSON:
-
-        Transcrição:
-        ${transcription}
-
-        O feedback deve seguir estritamente este formato JSON, e o JSON deve ser bem formado:
-
+        content: `Analise a seguinte transcrição de chamada e forneça um feedback detalhado em português no formato JSON para ser utilizado como response do backend, e siga rigorosamente este formato:
+    
         {
-        "score": Um valor entre 1 e 10 de nota geral para o desempenho do vendedor,
-        "feedback": { "positivo": "Texto destacando os pontos positivos do vendedor", "negativo": "Texto destacando os pontos que poderiam ser melhorados"}
-        "metricas": {
-          "duracaoDaLigacao": "Tempo total da ligação em minutos",
-          "palavrasPorMinuto": "Velocidade média de fala do representante",
-          "tempoFalando": "Porcentagem de tempo que o representante falou",
-          "tempoOuvindo": "Porcentagem de tempo que o representante escutou o cliente"
-        },
-        "sugestões": "Sugestões específicas para melhorar futuras chamadas"
+          "score": número de 1 a 10,
+          "feedback": {
+              "positivo": "Aspectos positivos da chamada",
+              "negativo": "Aspectos negativos da chamada"
+          },
+          "metricas": {
+              "duracaoDaLigacao": "Duração da ligação",
+              "palavrasPorMinuto": "Número de palavras por minuto",
+              "tempoFalando": "Porcentagem do tempo que o vendedor estava falando",
+              "tempoOuvindo": "Porcentagem do tempo que o vendedor estava ouvindo"
+          },
+          "sugestoes": "Sugestões para melhorar o desempenho"
         }
-
-        O JSON deve ser retornado completamente em formato válido e legível.`,
+    
+        Transcrição da Chamada:
+        ${transcription}
+        `,
       },
     ];
 
@@ -63,21 +63,11 @@ export class CallService {
       max_tokens: 500,
     });
     const rawContent = responseAI.choices[0].message.content;
-
+    console.log(rawContent);
     try {
       const parsedContent = JSON.parse(rawContent);
 
-      if (
-        parsedContent &&
-        typeof parsedContent.score === 'number' &&
-        parsedContent.feedback &&
-        parsedContent.metricasDaConversa &&
-        typeof parsedContent.sugestoesMelhorias === 'string'
-      ) {
-        return parsedContent;
-      } else {
-        throw new Error('Invalid JSON structure returned by OpenAI.');
-      }
+      return parsedContent;
     } catch (error) {
       throw new Error(`Failed to parse OpenAI response: ${error.message}`);
     }

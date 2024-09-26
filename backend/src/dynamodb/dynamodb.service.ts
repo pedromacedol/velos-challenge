@@ -11,7 +11,7 @@ export class DynamoDBService {
   constructor(private readonly configService: ConfigService) {
     this.dynamoDb = new DynamoDB.DocumentClient({
       region: this.configService.get<string>('DYNAMODB_REGION_NAME'),
-      accessKeyId: this.configService.get<string>('AWS_S3_ACCESS_KEY'), // Add access key here
+      accessKeyId: this.configService.get<string>('AWS_S3_ACCESS_KEY'),
       secretAccessKey: this.configService.get<string>(
         'AWS_S3_SECRET_ACCESS_KEY',
       ),
