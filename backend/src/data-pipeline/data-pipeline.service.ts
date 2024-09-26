@@ -24,7 +24,7 @@ export class DataPipelineService {
     )
     file: Express.Multer.File,
   ): Promise<any> {
-    const [uploadResponse, extractedMessages] = await Promise.all([
+    const [, extractedMessages] = await Promise.all([
       this.awsS3Service.upload(file.buffer, file.originalname),
       this.dataExtractionService.extractMessages(file.buffer),
     ]);
