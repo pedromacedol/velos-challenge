@@ -1,4 +1,4 @@
-# Instruções Case Estágio - Vélos
+# Case Estágio - Vélos
 
 ## Descrição do Projeto
 
